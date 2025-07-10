@@ -60,10 +60,6 @@ const Dashboard: React.FC = () => {
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-900/95 backdrop-blur-md border-t border-white/10">
                             <Link to="/" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</Link>
                             <Link to="/dashboard" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</Link>
-                            <Link to="/"><button className="w-full mt-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-2 rounded-full font-medium">
-                                Get Started
-                            </button>
-                            </Link>
                         </div>
                     </div>
                 )}

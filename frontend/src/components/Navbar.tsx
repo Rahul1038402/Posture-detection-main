@@ -27,14 +27,15 @@ export const Navbar = () => {
                                 </Link>
                                 <a href="#features" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
                                 <a href="#how-it-works" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">How It Works</a>
-                                <a href="#testimonials" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Reviews</a>
                             </div>
                         </div>
 
                         <div className="hidden md:block">
+                            <Link to="/dashboard">
                             <button className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-200 transform hover:scale-105">
                                 Get Started
                             </button>
+                            </Link>
                         </div>
 
                         <div className="md:hidden">
@@ -55,11 +56,15 @@ export const Navbar = () => {
                             <a href="/dashboard" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
                             <a href="#features" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Features</a>
                             <a href="#how-it-works" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">How It Works</a>
-                            <a href="#testimonials" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Reviews</a>
 
-                            <button className="w-full mt-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-2 rounded-full font-medium">
-                                Get Started
-                            </button>
+                            <Link to="/dashboard">
+                                <button
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-2 rounded-full font-medium transition-all duration-200 transform hover:scale-105"
+                                >
+                                    Get Started
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 )}
