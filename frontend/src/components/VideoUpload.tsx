@@ -12,8 +12,8 @@ const sendVideoForAnalysis = async (file: File, postureType: string): Promise<An
   const formData = new FormData();
   formData.append("file", file);
   formData.append("posture_type", postureType);
-
-  const res = await fetch("https://36689b43-7b2d-49f9-8eb4-242e433ea759-00-3wiqvcikr38f.spock.replit.dev/analyze-video/", {
+  
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/analyze-video/`, {
     method: "POST",
     body: formData,
   });
