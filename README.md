@@ -59,21 +59,37 @@ npm run dev
 ## 📁 Project Structure
 
 ├── backend/
+
 │   ├── app/
+
 │   │   ├── main.py
+
 │   │   └── services/
+
 │   │       └── video_analysis.py
+
 │   ├── requirements.txt
+
 │   └── ...
+
 │
+
 ├── frontend/
+
 │   ├── public/
+
 │   ├── src/
+
 │   │   ├── components/
+
 │   │   └── pages/
+
 │   ├── index.html
+
 │   └── ...
+
 └── README.md
+
 
 ## 🧪 Sample Usage
 
