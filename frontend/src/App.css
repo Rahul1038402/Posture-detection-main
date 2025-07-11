@@ -67,3 +67,13 @@
   background-size: 300% 300%;
   animation: gradientShift 4s ease infinite;
 }
+
+.footer-gradient {
+  background: linear-gradient(
+    to right,
+    #351150, /* purple-800 */
+    #12041c  /* black */
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 4s ease infinite;
+}
