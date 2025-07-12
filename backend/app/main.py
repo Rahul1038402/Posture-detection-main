@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import os
-import traceback  # ✅ Import for better error logging
+import traceback  
 
 from app.services.video_analysis import analyze_video
 
@@ -31,13 +31,11 @@ async def analyze_video_endpoint(
     file_path = os.path.join(UPLOAD_DIR, file.filename)
     
     try:
-        # ✅ Save the uploaded file
         with open(file_path, "wb") as f:
             f.write(await file.read())
 
         print(f"🧠 Running analysis with posture_type: {posture_type}")
 
-        # ✅ Call your analyzer
         feedback = analyze_video(file_path, posture_type)
 
         print("✅ Analysis complete")
@@ -45,7 +43,7 @@ async def analyze_video_endpoint(
     
     except Exception as e:
         print("❌ An error occurred:")
-        traceback.print_exc()  # 🔥 Show full traceback in terminal
+        traceback.print_exc()
         return JSONResponse(
             status_code=500,
             content={"error": str(e)}

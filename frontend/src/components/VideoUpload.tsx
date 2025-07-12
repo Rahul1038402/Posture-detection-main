@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, Video, Loader2, CheckCircle } from 'lucide-react';
+import { Upload, Video, Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
 
 type FeedbackItem = {
   frame: number;
@@ -12,12 +12,11 @@ const sendVideoForAnalysis = async (file: File, postureType: string): Promise<An
   const formData = new FormData();
   formData.append("file", file);
   formData.append("posture_type", postureType);
-  
+
   const res = await fetch(`${import.meta.env.VITE_API_URL}/analyze-video/`, {
     method: "POST",
     body: formData,
   });
-
 
   if (!res.ok) {
     throw new Error("Failed to analyze video");
@@ -26,32 +25,46 @@ const sendVideoForAnalysis = async (file: File, postureType: string): Promise<An
   return res.json();
 };
 
-
-
 const VideoUpload = ({ setFeedback }: { setFeedback: (data: any[]) => void }) => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
   const [postureType, setPostureType] = useState<'squat' | 'desk'>('squat');
+  const [progress, setProgress] = useState(0);
 
   const handleSubmit = async () => {
     if (!videoFile) return;
 
     setIsAnalyzing(true);
+    setProgress(0);
+
+    // Simulate progress every 200ms until response comes
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 90) {
+          clearInterval(progressInterval); // stop just before 100%
+          return prev;
+        }
+        return prev + 2; // adjust speed here
+      });
+    }, 200);
+
     try {
       const response = await sendVideoForAnalysis(videoFile, postureType);
       console.log("📬 Raw response from server:", response);
 
-      // If it's wrapped in an object like { feedback: [...] }
       const finalData = Array.isArray(response) ? response : response.feedback || [];
       setFeedback(finalData);
     } catch (error) {
       console.error('❌ Analysis failed:', error);
     } finally {
       setIsAnalyzing(false);
+      clearInterval(progressInterval);
+      setProgress(100);
+      setTimeout(() => setIsAnalyzing(false), 500); // optional delay
+
     }
   };
-
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -91,6 +104,10 @@ const VideoUpload = ({ setFeedback }: { setFeedback: (data: any[]) => void }) =>
           </h3>
           <p className="text-purple-100 text-sm mt-1">
             Upload your video for AI-powered analysis
+          </p>
+          <p className="text-yellow-300 flex text-sm mt-4">
+            <AlertTriangle className="mr-2" size={32} />
+            For best results, please upload videos in MP4 format and keep the file size under 20MB. Larger files may take longer to process.
           </p>
         </div>
 
@@ -134,7 +151,6 @@ const VideoUpload = ({ setFeedback }: { setFeedback: (data: any[]) => void }) =>
               </div>
             </div>
           </div>
-
 
           {videoFile && (
             <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
@@ -214,6 +230,16 @@ const VideoUpload = ({ setFeedback }: { setFeedback: (data: any[]) => void }) =>
               </>
             )}
           </button>
+
+          {isAnalyzing && (
+            <div className="w-full bg-gray-200 rounded-full h-3 mt-4">
+              <div
+                className="bg-purple-600 h-3 rounded-full transition-all duration-200"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          )}
+
         </div>
       </div>
     </div>
