@@ -171,12 +171,12 @@ const Landing: React.FC = () => {
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row gap-4">
-                                    <a href='/dashboard'>
+                                    <Link to='/dashboard'>
                                         <button className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-medium transition-all duration-200 transform hover:scale-105 flex items-center justify-center">
                                             <Camera className="w-5 h-5 mr-2" />
                                             Start Analysis
                                         </button>
-                                    </a>
+                                    </Link>
                                     <a href='https://drive.google.com/file/d/1R_VNLXgpnY7SaWoRIEmt6jDjhwp5mhjg/view?usp=sharing' target="_blank" rel="noopener noreferrer"> 
                                     <button className="border border-white/20 text-white px-8 py-4 rounded-full font-medium hover:bg-white/10 transition-all duration-200 flex items-center justify-center">
                                         <Play className="w-5 h-5 mr-2" />
