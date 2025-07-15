@@ -112,4 +112,5 @@ View posture issues flagged on screen.
 ## 👤 Author
 
 Rahul Kumar Mall
+
 PostureAI – 2025
